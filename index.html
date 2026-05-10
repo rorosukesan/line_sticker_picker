@@ -230,8 +230,9 @@
 let allStickers = [];
 let selected = new Set();
 
-function getThumbnail(shopUrl) {
+function getThumbnail(shopUrl, imageUrl) {
   if (!shopUrl) return '';
+  if (shopUrl.includes('/themeshop/')) return imageUrl || '';
   if (shopUrl.includes('/emojishop/')) {
     const m = shopUrl.match(/\/product\/([^\/]+)\//);
     if (m) return `https://stickershop.line-scdn.net/sticonshop/v1/product/${m[1]}/iPhone/main.png`;
@@ -259,10 +260,11 @@ function generateLineUrl(shopUrl) {
 function kindLabel(kind) {
   if (!kind) return '';
   const map = {
-    'animation-sticker-icon': 'アニメ',
-    'animation-sticon-icon': 'アニメ絵文字',
-    'popup-sticker-icon': 'ポップアップ',
-    'message-sticker-icon': 'メッセージ',
+    'animation-sticker-icon':       'アニメ',
+    'animation-sticon-icon':        'アニメ絵文字',
+    'popup-effect-sticker-icon':    'ポップアップ',
+    'message-sticker-icon':         'メッセージ',
+    'name-sticker-icon':            'カスタム',
   };
   const label = map[kind] || kind.replace(/-icon$/, '');
   return `<div class="kind-badge">${label}</div>`;
@@ -324,7 +326,8 @@ function renderGrid() {
   grid.innerHTML = filtered.map(s => {
     const id = allStickers.indexOf(s);
     const shopUrl = s['ショップURL'] || '';
-    const thumb = getThumbnail(shopUrl);
+    const imageUrl = s['画像URL'] || '';
+    const thumb = getThumbnail(shopUrl, imageUrl);
     const isSel = selected.has(id);
     return `<div class="sticker-card ${isSel?'selected':''}" onclick="toggleSelect(${id})">
       <img class="sticker-img" src="${thumb}" alt="${s['タイトル']}" loading="lazy" onerror="this.src='';this.style.background='#eee';this.style.minHeight='100px'">
