@@ -135,6 +135,25 @@
   }
 
   .sticker-info { padding: 8px; }
+  .card-buttons {
+    display: flex;
+    gap: 4px;
+    padding: 0 8px 8px;
+  }
+  .card-btn {
+    flex: 1;
+    padding: 4px 0;
+    font-size: 9px;
+    font-weight: 700;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+  .card-btn-shop { background: #e8f4fd; color: #2980b9; }
+  .card-btn-shop:hover { background: #2980b9; color: white; }
+  .card-btn-app  { background: #e8fdf0; color: #06C755; }
+  .card-btn-app:hover  { background: #06C755; color: white; }
   .sticker-title {
     font-size: 10px; color: #333; line-height: 1.4;
     display: -webkit-box;
@@ -334,6 +353,10 @@ function renderGrid() {
       <div class="sticker-info">
         <div class="sticker-title">${s['タイトル']}</div>
         <div class="sticker-cat">${s['カテゴリ']||''}${kindLabel(s['種別']||'')}</div>
+      </div>
+      <div class="card-buttons">
+        <button class="card-btn card-btn-shop" onclick="event.stopPropagation();window.open('${shopUrl}','_blank')">🌐 ショップ</button>
+        <button class="card-btn card-btn-app"  onclick="event.stopPropagation();window.open('${s['LINEアプリURL']||generateLineUrl(shopUrl)}','_blank')">📱 アプリ</button>
       </div>
     </div>`;
   }).join('');
