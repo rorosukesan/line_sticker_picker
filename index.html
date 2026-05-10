@@ -200,8 +200,6 @@
 
 <div id="mainArea" style="display:none">
   <div class="controls">
-    <button class="btn btn-gray" onclick="resetPicker()">🔄 リセット</button>
-    <button class="btn btn-gray" onclick="document.getElementById('fileInput').click()">📂 CSV変更</button>
     <select class="filter-select" id="catFilter" onchange="renderGrid()">
       <option value="">すべて</option>
       <option value="スタンプ">スタンプ</option>
@@ -211,6 +209,7 @@
     <button class="btn btn-gray" onclick="clearSelection()">選択解除</button>
     <button class="btn btn-red" onclick="randomSelect(20)">🎲 ランダム20</button>
     <button class="btn btn-purple" onclick="randomSelect(10)">🎲 ランダム10</button>
+    <button class="btn btn-gray" onclick="resetPicker()">🔄 リセット</button>
     <div class="selected-info">選択中: <span id="selectedCount">0</span>件</div>
   </div>
   <div class="grid" id="grid"></div>
