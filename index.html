@@ -200,6 +200,7 @@
 
 <div id="mainArea" style="display:none">
   <div class="controls">
+    <button class="btn btn-gray" onclick="resetPicker()">🔄 リセット</button>
     <button class="btn btn-gray" onclick="document.getElementById('fileInput').click()">📂 CSV変更</button>
     <select class="filter-select" id="catFilter" onchange="renderGrid()">
       <option value="">すべて</option>
@@ -337,6 +338,19 @@ function renderGrid() {
       </div>
     </div>`;
   }).join('');
+}
+
+function resetPicker() {
+  allStickers = [];
+  selected.clear();
+  document.getElementById('fileInput').value = '';
+  document.getElementById('mainArea').style.display = 'none';
+  document.getElementById('uploadArea').style.display = 'flex';
+  document.getElementById('totalCount').textContent = '0件';
+  document.getElementById('selectedCount').textContent = '0';
+  document.getElementById('outputPanel').classList.remove('visible');
+  document.getElementById('outputText').value = '';
+  document.getElementById('catFilter').value = '';
 }
 
 function toggleSelect(id) {
